@@ -1,14 +1,16 @@
-from menus import menu_choice_1, menu_choice_2
-from logic import creation_graphe, transformer_en_df, creation_manuelle_matrice, creation_automatic_matrice
-from viz import visualiser_matrice
+from menus import main_menu, input_mode_menu
+from logic import create_empty_matrix, transform_to_dataframe, create_manual_matrix, create_automatic_matrix
+from viz import visualize_matrix
+
 if __name__ == "__main__":
-    nb = menu_choice_1()
-    df = transformer_en_df(creation_graphe(nb))
-    mode = menu_choice_2()
+    node_count = main_menu()
+    matrix_df = transform_to_dataframe(create_empty_matrix(node_count))
+    
+    mode = input_mode_menu()
     if mode == 1:
-        df_final = creation_manuelle_matrice(df)
+        final_df = create_manual_matrix(matrix_df)
     else:
-        df_final = creation_automatic_matrice(df)
+        final_df = create_automatic_matrix(matrix_df)
         
-    print(df_final)
-    visualiser_matrice(df_final)
+    print(final_df)
+    visualize_matrix(final_df)

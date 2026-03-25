@@ -1,55 +1,38 @@
-import numpy as np
-import matplotlib.pyplot as plt
-import pandas as pd
-import random
-
-def menu_choice_1():
+def main_menu():
     while True:
         try:
-            choice = int(input("Tapez 1 pour créer un graphe || Tapez 2 pour faire l'algorithme : "))
+            choice = int(input("Press 1 to create a graph || Press 2 for the algorithm : "))
             if choice == 1:
                 try:
-                    
-                    nb_sommit = int(input("Nombre de sommets de la matrice a créer (maximum 10): "))
-                    if 1 <= nb_sommit <= 10:
-                        return nb_sommit
+                    node_count = int(input("Number of nodes (max 10): "))
+                    if 1 <= node_count <= 10:
+                        return node_count
                     else:
-                        print("ERREUR : le nombre choisi doit être compris entre 1 et 10 inclus.")
+                        print("ERROR: Number must be between 1 and 10.")
                 except ValueError:
-                    ("ERREUR : Veuillez entrer un nombre entier valide.")
+                    print("ERROR: Please enter a valid integer.")
             else:
-                print("ERREUR : le nombre choisi doit être 1 ou 2.")
+                print("ERROR: Choice must be 1 or 2.")
         except ValueError:
-            print("ERREUR : Veuillez entrer un nombre entier valide.")
+            print("ERROR: Please enter a valid integer.")
 
-
-
-
-def menu_choice_2():
+def input_mode_menu():
     while True:
         try:
-            choice = int(input("Tapez 1 pour créer manuellement le graphe || Tapez 2 pour générer un graphe valide : "))
-            if choice not in [1,2]:
-                print("ERREUR : le nombre choisi doit être 1 ou 2.")
-            else:
+            choice = int(input("Press 1 for Manual creation || Press 2 for Automatic generation: "))
+            if choice in [1, 2]:
                 return choice
+            print("ERROR: Choice must be 1 or 2.")
         except ValueError:
-            print("ERREUR : Veuillez entrer un nombre entier valide.")
-         
-def nombre_est_valide(matrice_df, index, colums):
+            print("ERROR: Please enter a valid integer.")
+
+def validate_edge_input(matrix_df, row_idx, col_idx):
     while True:
         try:
-            print(matrice_df)
-            choice = int(input(f"Tapez 0 ou 1 pour le nombre en [S{index+1}, S{colums+1}] : "))
-            if choice not in [0,1]:
-                print("ERREUR : le nombre choisi doit être 0 ou 1.")
-            else:
+            print(matrix_df)
+            choice = int(input(f"Enter 0 or 1 for edge [S{row_idx+1}, S{col_idx+1}]: "))
+            if choice in [0, 1]:
                 return choice
+            print("ERROR: Value must be 0 or 1.")
         except ValueError:
-            print("ERREUR : Veuillez entrer un nombre entier valide.")
-
-
-
-
-
-
+            print("ERROR: Please enter a valid integer.")

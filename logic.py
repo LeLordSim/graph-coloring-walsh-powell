@@ -1,50 +1,38 @@
 import numpy as np
 import pandas as pd
 import random
+from menus import validate_edge_input
 
-def creation_graphe(nb_sommit):
-    return np.zeros((nb_sommit, nb_sommit), dtype=int)
+def create_empty_matrix(node_count):
+    return np.zeros((node_count, node_count), dtype=int)
 
-def transformer_en_df(matrice):
-    names = [f"S{i+1}" for i in range(len(matrice))]
-    return pd.DataFrame(matrice, index=names, columns=names)
+def transform_to_dataframe(matrix):
+    size = len(matrix)
+    names = [f"S{i+1}" for i in range(size)]
+    return pd.DataFrame(matrix, index=names, columns=names)
 
-def nombre_est_valide(matrice_df, index, colums):
-    while True:
-        try:
-            print(matrice_df)
-            choice = int(input(f"Tapez 0 ou 1 pour le nombre en [S{index+1}, S{colums+1}] : "))
-            if choice not in [0,1]:
-                print("ERREUR : le nombre choisi doit être 0 ou 1.")
+def create_manual_matrix(matrix_df):
+    size = matrix_df.shape[0]
+    for i in range(size):
+        for j in range(i, size):
+            if i == j:
+                matrix_df.iloc[i, j] = 0
             else:
-                return choice
-        except ValueError:
-            print("ERREUR : Veuillez entrer un nombre entier valide.")
-    
-def creation_manuelle_matrice(matrice_df):
-    nb_cols = matrice_df.shape[0]
-    nb_index = matrice_df.shape[1]
-    for i in range(nb_index):
-        for j in range(i, nb_cols):
-            if (i == j):
-                matrice_df.iloc[i,j] = 0
-            else:
-                val = nombre_est_valide(matrice_df, i, j)
-                matrice_df.iloc[i,j] = val
-                matrice_df.iloc[j,i] = val
-    print ( " MATRICE COMPLETE ")
-    return matrice_df
+                val = validate_edge_input(matrix_df, i, j)
+                matrix_df.iloc[i, j] = val
+                matrix_df.iloc[j, i] = val
+    print("MATRIX COMPLETED")
+    return matrix_df
 
-def creation_automatic_matrice(matrice_df):
-    nb_cols = matrice_df.shape[0]
-    nb_index = matrice_df.shape[1]
-    for i in range(nb_index):
-        for j in range(i, nb_cols):
-            if (i == j):
-                matrice_df.iloc[i,j] = 0
+def create_automatic_matrix(matrix_df):
+    size = matrix_df.shape[0]
+    for i in range(size):
+        for j in range(i, size):
+            if i == j:
+                matrix_df.iloc[i, j] = 0
             else:
                 val = random.randint(0, 1)
-                matrice_df.iloc[i,j] = val
-                matrice_df.iloc[j,i] = val
-    print ( " MATRICE COMPLETE ")
-    return matrice_df
+                matrix_df.iloc[i, j] = val
+                matrix_df.iloc[j, i] = val
+    print("MATRIX COMPLETED")
+    return matrix_df
