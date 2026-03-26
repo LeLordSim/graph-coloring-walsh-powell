@@ -23,5 +23,6 @@ def visualize_matrix(matrix_df):
     for i, name in enumerate(matrix_df.columns):
         ax.text(pos_x[i], pos_y[i], name, ha='center', va='center', fontweight='bold', zorder=3)
     
-    plt.title(graph_name, fontsize=16, pad=50)
+    plt.title(graph_name, fontsize=16, pad=40)
+    plt.margins(0.2)
     plt.show()
